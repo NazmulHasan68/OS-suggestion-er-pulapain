@@ -1,0 +1,1256 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Operating System — Bilingual Q&A | দ্বিভাষিক প্রশ্নোত্তর</title>
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Noto+Serif+Bengali:wght@400;600;700&family=Merriweather:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d1117;
+    --card: #161c27;
+    --border: #2d3748;
+    --accent1: #60a5fa;
+    --accent2: #fb923c;
+    --accent3: #4ade80;
+    --accent4: #c084fc;
+    --accent5: #f87171;
+    --text: #e2e8f0;
+    --muted: #718096;
+    --bn-color: #fbbf24;
+    --en-color: #60a5fa;
+    --ans-bg: #0f1d0f;
+    --ans-border: #166534;
+    --info-bg: #0c1a2e;
+    --info-border: #1e4080;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Hind Siliguri', 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.8;
+    min-height: 100vh;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    padding: 52px 24px 44px;
+    text-align: center;
+    border-bottom: 1px solid var(--border);
+    background: radial-gradient(ellipse 800px 300px at 50% 0%, rgba(96,165,250,0.08) 0%, transparent 70%), #0d1117;
+  }
+
+  .badge-row { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-bottom: 22px; }
+  .badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 4px 14px; border-radius: 20px; font-size: 12px; font-weight: 500;
+  }
+  .badge-blue  { background: rgba(96,165,250,0.12); border: 1px solid rgba(96,165,250,0.3); color: var(--accent1); }
+  .badge-gold  { background: rgba(251,191,36,0.12);  border: 1px solid rgba(251,191,36,0.3);  color: var(--bn-color); }
+
+  .hero h1 {
+    font-size: clamp(22px, 5vw, 38px);
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 6px;
+    line-height: 1.3;
+  }
+  .hero h1 .bn { font-family: 'Noto Serif Bengali', serif; }
+  .hero h1 .en { font-family: 'Merriweather', serif; font-size: 0.72em; display: block; color: #94a3b8; margin-top: 4px; }
+
+  .hero-sub { color: var(--muted); font-size: 14px; margin-top: 10px; }
+
+  .stats { display: flex; justify-content: center; gap: 36px; margin-top: 30px; flex-wrap: wrap; }
+  .stat-num { font-size: 26px; font-weight: 700; color: var(--accent1); font-family: 'Merriweather', serif; }
+  .stat-lbl  { font-size: 11px; color: var(--muted); margin-top: 2px; }
+
+  /* ── LANG BADGE inline ── */
+  .lang-bn { color: var(--bn-color); font-size: 10px; font-weight: 700; letter-spacing: 0.5px; vertical-align: middle; }
+  .lang-en { color: var(--en-color); font-size: 10px; font-weight: 700; letter-spacing: 0.5px; vertical-align: middle; }
+
+  /* ── CONTAINER ── */
+  .container { max-width: 920px; margin: 0 auto; padding: 44px 20px 90px; }
+
+  /* ── CHAPTER ── */
+  .chapter { margin-bottom: 60px; }
+
+  .chapter-header {
+    display: flex; align-items: flex-start; gap: 14px;
+    margin-bottom: 28px; padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .ch-num {
+    width: 44px; height: 44px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 17px; flex-shrink: 0; margin-top: 2px;
+  }
+  .ch1 .ch-num { background: rgba(96,165,250,0.14); color: var(--accent1); }
+  .ch2 .ch-num { background: rgba(251,146,60,0.14);  color: var(--accent2); }
+  .ch3 .ch-num { background: rgba(74,222,128,0.14);  color: var(--accent3); }
+  .ch4 .ch-num { background: rgba(192,132,252,0.14); color: var(--accent4); }
+  .ch5 .ch-num { background: rgba(248,113,113,0.14); color: var(--accent5); }
+
+  .ch-title .bn-title {
+    font-family: 'Noto Serif Bengali', serif;
+    font-size: 19px; font-weight: 700; color: #fff; line-height: 1.4;
+  }
+  .ch-title .en-title {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px; color: var(--muted); margin-top: 3px;
+  }
+
+  /* ── QA CARD ── */
+  .qa-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    margin-bottom: 14px;
+    overflow: hidden;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .qa-card:hover { border-color: rgba(96,165,250,0.3); box-shadow: 0 0 0 1px rgba(96,165,250,0.08); }
+
+  /* question block */
+  .q-block {
+    display: flex; gap: 13px; padding: 18px 18px 16px;
+    cursor: pointer; align-items: flex-start;
+  }
+
+  .q-icon {
+    flex-shrink: 0; width: 30px; height: 30px; border-radius: 7px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 800; margin-top: 1px;
+  }
+  .ch1 .q-icon { background: rgba(96,165,250,0.14); color: var(--accent1); }
+  .ch2 .q-icon { background: rgba(251,146,60,0.14);  color: var(--accent2); }
+  .ch3 .q-icon { background: rgba(74,222,128,0.14);  color: var(--accent3); }
+  .ch4 .q-icon { background: rgba(192,132,252,0.14); color: var(--accent4); }
+  .ch5 .q-icon { background: rgba(248,113,113,0.14); color: var(--accent5); }
+
+  .q-text { flex: 1; }
+
+  /* bilingual question lines */
+  .q-bn {
+    font-family: 'Noto Serif Bengali', serif;
+    font-size: 15.5px; font-weight: 600; color: var(--text); line-height: 1.55;
+    display: flex; align-items: flex-start; gap: 6px;
+  }
+  .q-en {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px; color: #94a3b8; line-height: 1.5; margin-top: 5px;
+    display: flex; align-items: flex-start; gap: 6px;
+    font-style: italic;
+  }
+  .q-bn .lbl, .q-en .lbl { flex-shrink: 0; margin-top: 1px; }
+
+  .arr {
+    flex-shrink: 0; width: 24px; height: 24px; border-radius: 50%;
+    background: rgba(255,255,255,0.05);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--muted); font-size: 13px; margin-top: 3px;
+    transition: transform 0.25s, background 0.2s;
+  }
+  .qa-card.open .arr { transform: rotate(180deg); background: rgba(96,165,250,0.14); color: var(--accent1); }
+
+  /* answer block */
+  .a-block { display: none; padding: 0 18px 20px 61px; }
+  .qa-card.open .a-block { display: block; }
+
+  .a-divider { border: none; border-top: 1px solid var(--border); margin: 0 0 16px; }
+
+  /* answer section labels */
+  .ans-section {
+    margin-bottom: 18px;
+  }
+  .ans-section:last-child { margin-bottom: 0; }
+
+  .ans-lang-label {
+    display: inline-flex; align-items: center; gap: 5px;
+    font-size: 10.5px; font-weight: 700; letter-spacing: 0.6px;
+    text-transform: uppercase; margin-bottom: 10px;
+    padding: 3px 10px; border-radius: 4px;
+  }
+  .ans-lang-label.bn-label { background: rgba(251,191,36,0.1); color: var(--bn-color); border: 1px solid rgba(251,191,36,0.2); }
+  .ans-lang-label.en-label { background: rgba(96,165,250,0.1); color: var(--accent1); border: 1px solid rgba(96,165,250,0.2); }
+
+  .ans-section p {
+    font-size: 14px; color: #cbd5e0; line-height: 1.85; margin-bottom: 8px;
+  }
+  .ans-section p:last-child { margin-bottom: 0; }
+  .ans-section ul, .ans-section ol { padding-left: 18px; margin-bottom: 8px; }
+  .ans-section li { font-size: 14px; color: #cbd5e0; line-height: 1.8; margin-bottom: 5px; }
+  .ans-section .en-text { font-family: 'Inter', sans-serif; }
+  .ans-section .bn-text { font-family: 'Hind Siliguri', sans-serif; }
+
+  .ans-sep { border: none; border-top: 1px dashed var(--border); margin: 16px 0; }
+
+  /* callout boxes */
+  .box-green {
+    background: rgba(74,222,128,0.06); border-left: 3px solid var(--accent3);
+    padding: 11px 14px; border-radius: 0 8px 8px 0; margin-top: 10px;
+    font-size: 13.5px; color: #a7f3d0; line-height: 1.7;
+  }
+  .box-blue {
+    background: rgba(96,165,250,0.06); border-left: 3px solid var(--accent1);
+    padding: 11px 14px; border-radius: 0 8px 8px 0; margin-top: 10px;
+    font-size: 13.5px; color: #bfdbfe; line-height: 1.7;
+  }
+
+  strong { color: #e2e8f0; }
+
+  footer {
+    text-align: center; padding: 24px;
+    border-top: 1px solid var(--border);
+    color: var(--muted); font-size: 12.5px;
+  }
+
+  @media (max-width: 600px) {
+    .a-block { padding-left: 18px; }
+    .stats { gap: 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══════════════════ HERO ══════════════════ -->
+<div class="hero">
+  <div class="badge-row">
+    <span class="badge badge-blue">CSE-3103 · Bangladesh University</span>
+    <span class="badge badge-gold">বাংলা · English</span>
+  </div>
+  <h1>
+    <span class="bn">অপারেটিং সিস্টেম — দ্বিভাষিক প্রশ্নোত্তর</span>
+    <span class="en">Operating System — Bilingual Question &amp; Answer</span>
+  </h1>
+  <p class="hero-sub">পিডিএফ থেকে সম্পূর্ণ বিশ্লেষণ · Full analysis from the PDF · প্রতিটি প্রশ্ন বাংলা ও ইংরেজি উভয় ভাষায়</p>
+  <div class="stats">
+    <div><div class="stat-num">5</div><div class="stat-lbl">Chapters / অধ্যায়</div></div>
+    <div><div class="stat-num">35</div><div class="stat-lbl">Questions / প্রশ্ন</div></div>
+    <div><div class="stat-num">2</div><div class="stat-lbl">Languages / ভাষা</div></div>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ══════════════════════════════════════════
+     CHAPTER 1
+══════════════════════════════════════════ -->
+<div class="chapter ch1">
+  <div class="chapter-header">
+    <div class="ch-num">১</div>
+    <div class="ch-title">
+      <div class="bn-title">অপারেটিং সিস্টেমের বিবর্তন ও আর্কিটেকচার</div>
+      <div class="en-title">Evolution &amp; Architecture of Operating System</div>
+    </div>
+  </div>
+
+  <!-- Q1 -->
+  <div class="qa-card" onclick="tog(this)">
+    <div class="q-block">
+      <div class="q-icon">Q</div>
+      <div class="q-text">
+        <div class="q-bn"><span class="lbl"><span class="lang-bn">বাং</span></span> অপারেটিং সিস্টেম কী? এটি কোন ভূমিকা পালন করে?</div>
+        <div class="q-en"><span class="lbl"><span class="lang-en">EN</span></span> What is an Operating System? What role does it play?</div>
+      </div>
+      <div class="arr">▾</div>
+    </div>
+    <div class="a-block">
+      <hr class="a-divider">
+      <div class="ans-section">
+        <div class="ans-lang-label bn-label">✦ বাংলা উত্তর</div>
+        <p class="bn-text">অপারেটিং সিস্টেম (OS) হলো একটি সিস্টেম সফটওয়্যার যা ব্যবহারকারী এবং কম্পিউটার হার্ডওয়্যারের মধ্যে <strong>সেতু</strong> হিসেবে কাজ করে। OS ছাড়া কম্পিউটার কোনো প্রোগ্রাম চালাতে পারে না। ব্যবহারকারীর কমান্ড (ক্লিক, টাইপ) OS হার্ডওয়্যার নির্দেশে রূপান্তর করে।</p>
+        <div class="box-green bn-text">সংক্ষেপে: User → Operating System → Hardware — এই তিন স্তর মিলে সিস্টেম গঠিত।</div>
+      </div>
+      <hr class="ans-sep">
+      <div class="ans-section">
+        <div class="ans-lang-label en-label">✦ English Answer</div>
+        <p class="en-text">An Operating System (OS) is system software that acts as a <strong>bridge</strong> between the user and the computer hardware. Without an OS, a computer cannot run any program. It translates user commands (clicks, keystrokes) into hardware instructions.</p>
+        <div class="box-blue en-text">In short: User → Operating System → Hardware — these three layers form a complete computing system.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q2 -->
+  <div class="qa-card" onclick="tog(this)">
+    <div class="q-block">
+      <div class="q-icon">Q</div>
+      <div class="q-text">
+        <div class="q-bn"><span class="lbl"><span class="lang-bn">বাং</span></span> অপারেটিং সিস্টেমের পাঁচটি প্রধান কাজ কী কী?</div>
+        <div class="q-en"><span class="lbl"><span class="lang-en">EN</span></span> What are the five main functions of an Operating System?</div>
+      </div>
+      <div class="arr">▾</div>
+    </div>
+    <div class="a-block">
+      <hr class="a-divider">
+      <div class="ans-section">
+        <div class="ans-lang-label bn-label">✦ বাংলা উত্তর</div>
+        <ol class="bn-text">
+          <li><strong>প্রসেস ম্যানেজমেন্ট:</strong> কোন প্রোগ্রাম কখন চলবে তা নিয়ন্ত্রণ করে।</li>
+          <li><strong>মেমোরি ম্যানেজমেন্ট:</strong> প্রোগ্রামকে মেমোরি বরাদ্দ দেয় এবং ব্যবহার শেষে ফিরিয়ে নেয়।</li>
+          <li><strong>ফাইল সিস্টেম ম্যানেজমেন্ট:</strong> ডিস্কে ফাইল সংরক্ষণ ও সংগঠিত করে।</li>
+          <li><strong>ডিভাইস ম্যানেজমেন্ট:</strong> কীবোর্ড, প্রিন্টার, মাউস পরিচালনা করে।</li>
+          <li><strong>নিরাপত্তা ও অ্যাক্সেস নিয়ন্ত্রণ:</strong> অননুমোদিত ব্যবহারকারীদের থেকে সিস্টেম সুরক্ষিত রাখে।</li>
+        </ol>
+      </div>
+      <hr class="ans-sep">
+      <div class="ans-section">
+        <div class="ans-lang-label en-label">✦ English Answer</div>
+        <ol class="en-text">
+          <li><strong>Process Management:</strong> Controls which program runs and when.</li>
+          <li><strong>Memory Management:</strong> Allocates memory to programs and reclaims it after use.</li>
+          <li><strong>File System Management:</strong> Stores and organizes files on disk.</li>
+          <li><strong>Device Management:</strong> Manages hardware like keyboard, printer, and mouse.</li>
+          <li><strong>Security &amp; Access Control:</strong> Protects the system from unauthorized users.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q3 -->
+  <div class="qa-card" onclick="tog(this)">
+    <div class="q-block">
+      <div class="q-icon">Q</div>
+      <div class="q-text">
+        <div class="q-bn"><span class="lbl"><span class="lang-bn">বাং</span></span> অপারেটিং সিস্টেমের ৫টি প্রজন্ম সংক্ষেপে ব্যাখ্যা করো।</div>
+        <div class="q-en"><span class="lbl"><span class="lang-en">EN</span></span> Briefly explain the 5 generations of Operating Systems.</div>
+      </div>
+      <div class="arr">▾</div>
+    </div>
+    <div class="a-block">
+      <hr class="a-divider">
+      <div class="ans-section">
+        <div class="ans-lang-label bn-label">✦ বাংলা উত্তর</div>
+        <ol class="bn-text">
+          <li><strong>১ম প্রজন্ম (১৯৪৫–৫৫):</strong> কোনো OS ছিল না। ভ্যাকুয়াম টিউব ও পাঞ্চড কার্ড। উদাহরণ: ENIAC।</li>
+          <li><strong>২য় প্রজন্ম (১৯৫৫–৬৫):</strong> ব্যাচ প্রসেসিং। ট্রানজিস্টর ব্যবহার। উদাহরণ: IBM OS/360।</li>
+          <li><strong>৩য় প্রজন্ম (১৯৬৫–৮০):</strong> মাল্টিপ্রোগ্রামিং ও টাইম-শেয়ারিং। UNIX জন্ম নেয় (১৯৬৯)।</li>
+          <li><strong>৪র্থ প্রজন্ম (১৯৮০–বর্তমান):</strong> পার্সোনাল কম্পিউটার ও GUI। উদাহরণ: Windows, macOS।</li>
+          <li><strong>৫ম প্রজন্ম (বর্তমান–ভবিষ্যৎ):</strong> মোবাইল, ক্লাউড ও AI OS। উদাহরণ: Android, iOS, Chrome OS।</li>
+        </ol>
+      </div>
+      <hr class="ans-sep">
+      <div class="ans-section">
+        <div class="ans-lang-label en-label">✦ English Answer</div>
+        <ol class="en-text">
+          <li><strong>1st Gen (1945–55):</strong> No OS. Vacuum tubes and punched cards. Example: ENIAC.</li>
+          <li><strong>2nd Gen (1955–65):</strong> Batch processing. Transistors used. Example: IBM OS/360.</li>
+          <li><strong>3rd Gen (1965–80):</strong> Multiprogramming &amp; time-sharing. UNIX born in 1969.</li>
+          <li><strong>4th Gen (1980–present):</strong> Personal computers and GUI. Example: Windows, macOS.</li>
+          <li><strong>5th Gen (present–future):</strong> Mobile, cloud &amp; AI OS. Example: Android, iOS, Chrome OS.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q4 -->
+  <div class="qa-card" onclick="tog(this)">
+    <div class="q-block">
+      <div class="q-icon">Q</div>
+      <div class="q-text">
+        <div class="q-bn"><span class="lbl"><span class="lang-bn">বাং</span></span> মনোলিথিক ও মাইক্রোকার্নেল আর্কিটেকচারের পার্থক্য লেখো।</div>
+        <div class="q-en"><span class="lbl"><span class="lang-en">EN</span></span> Differentiate between Monolithic and Microkernel architecture.</div>
+      </div>
+      <div class="arr">▾</div>
+    </div>
+    <div class="a-block">
+      <hr class="a-divider">
+      <div class="ans-section">
+        <div class="ans-lang-label bn-label">✦ বাংলা উত্তর</div>
+        <ul class="bn-text">
+          <li><strong>মনোলিথিক:</strong> সমস্ত OS সার্ভিস একটি বড় কার্নেল ব্লকে চলে। খুব দ্রুত। কিন্তু একটি বাগ পুরো সিস্টেম ক্র্যাশ করতে পারে। উদাহরণ: Linux, MS-DOS।</li>
+          <li><strong>মাইক্রোকার্নেল:</strong> কার্নেলে শুধু IPC, মেমোরি ও CPU শিডিউলিং থাকে। বাকি সার্ভিস ইউজার-স্পেসে। নিরাপদ কিন্তু তুলনামূলক ধীর। উদাহরণ: MINIX, QNX।</li>
+        </ul>
+        <div class="box-green bn-text">মনে রাখো: Monolithic = গতি, Microkernel = নিরাপত্তা, Hybrid = উভয়ের সেরা।</div>
+      </div>
+      <hr class="ans-sep">
+      <div class="ans-section">
+        <div class="ans-lang-label en-label">✦ English Answer</div>
+        <ul class="en-text">
+          <li><strong>Monolithic:</strong> All OS services run inside one large kernel block. Very fast but a bug in one part can crash the whole system. Example: Linux, MS-DOS.</li>
+          <li><strong>Microkernel:</strong> Only IPC, memory management, and CPU scheduling stay in the kernel. Other services run in user space. Highly secure but slower due to message passing. Example: MINIX, QNX.</li>
+        </ul>
+        <div class="box-blue en-text">Remember: Monolithic = speed, Microkernel = security, Hybrid = best of both.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q5 -->
+  <div class="qa-card" onclick="tog(this)">
+    <div class="q-block">
+      <div class="q-icon">Q</div>
+      <div class="q-text">
+        <div class="q-bn"><span class="lbl"><span class="lang-bn">বাং</span></span> লেয়ারড ও মডুলার আর্কিটেকচার কীভাবে কাজ করে?</div>
+        <div class="q-en"><span class="lbl"><span class="lang-en">EN</span></span> How do Layered and Modular architectures work?</div>
+      </div>
+      <div class="arr">▾</div>
+    </div>
+    <div class="a-block">
+      <hr class="a-divider">
+      <div class="ans-section">
+        <div class="ans-lang-label bn-label">✦ বাংলা উত্তর</div>
+        <p class="bn-text"><strong>লেয়ারড:</strong> OS-কে নির্দিষ্ট নম্বরযুক্ত স্তরে ভাগ করা হয়। প্রতিটি স্তর শুধুমাত্র তার নিচের স্তরের সার্ভিস ব্যবহার করে। ডিবাগ সহজ কিন্তু ধীর। উদাহরণ: THE OS (Dijkstra, ১৯৬৮)।</p>
+        <p class="bn-text"><strong>মডুলার:</strong> OS আলাদা স্বাধীন মডিউল দিয়ে তৈরি। সিস্টেম চলার সময়েই মডিউল যোগ বা বাদ দেওয়া যায়। খুব নমনীয়। উদাহরণ: Modern Linux, Solaris।</p>
+      </div>
+      <hr class="ans-sep">
+      <div class="ans-section">
+        <div class="ans-lang-label en-label">✦ English Answer</div>
+        <p class="en-text"><strong>Layered:</strong> The OS is divided into numbered layers. Each layer only uses services from the layer directly below it. Easy to debug but slower due to multiple layer traversal. Example: THE OS (Dijkstra, 1968).</p>
+        <p class="en-text"><strong>Modular:</strong> The OS is built from separate, independent modules — each handling one task. Modules can be added or removed while the system runs. Very flexible. Example: Modern Linux, Solaris.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q6 -->
+  <div class="qa-card" onclick="tog(this)">
+    <div class="q-block">
+      <div class="q-icon">Q</div>
+      <div class="q-text">
+        <div class="q-bn"><span class="lbl"><span class="lang-bn">বাং</span></span> হাইব্রিড আর্কিটেকচার কী এবং কোন OS এটি ব্যবহার করে?</div>
+        <div class="q-en"><span class="lbl"><span class="lang-en">EN</span></span> What is Hybrid architecture and which OS uses it?</div>
+      </div>
+      <div class="arr">▾</div>
+    </div>
+    <div class="a-block">
+      <hr class="a-divider">
+      <div class="ans-section">
+        <div class="ans-lang-label bn-label">✦ বাংলা উত্তর</div>
+        <p class="bn-text">হাইব্রিড আর্কিটেকচার হলো মনোলিথিক ও মাইক্রোকার্নেলের সমন্বয়। মূল সার্ভিসগুলো (Process Manager, Memory Manager, Core Drivers) কার্নেল স্পেসে — গতির জন্য। অন্যান্য সার্ভিস (GUI, Network Stack) ইউজার স্পেসে — নিরাপত্তার জন্য।</p>
+        <div class="box-green bn-text">উদাহরণ: Windows NT/10/11, macOS (XNU Kernel), Android।</div>
+      </div>
+      <hr class="ans-sep">
+      <div class="ans-section">
+        <div class="ans-lang-label en-label">✦ English Answer</div>
+        <p class="en-text">Hybrid architecture combines features of Monolithic and Microkernel designs. Core services (Process Manager, Memory Manager, Core Drivers) run in kernel space for speed; other services (GUI, Network Stack, Security) run in user space for safety.</p>
+        <div class="box-blue en-text">Examples: Windows NT/10/11, macOS (XNU Kernel), Android.</div>
+      </div>
+    </div>
+  </div>
+</div><!-- /ch1 -->
+
+
+<!-- ══════════════════════════════════════════
+     CHAPTER 2
+══════════════════════════════════════════ -->
+<div class="chapter ch2">
+  <div class="chapter-header">
+    <div class="ch-num">২</div>
+    <div class="ch-title">
+      <div class="bn-title">ফাইল সিস্টেম ডিজাইন ও বাস্তবায়ন</div>
+      <div class="en-title">File System Design and Implementation</div>
+    </div>
+  </div>
+
+  <!-- Q7 -->
+  <div class="qa-card" onclick="tog(this)">
+    <div class="q-block">
+      <div class="q-icon">Q</div>
+      <div class="q-text">
+        <div class="q-bn"><span class="lbl"><span class="lang-bn">বাং</span></span> ফাইল সিস্টেম কী? এটি কেন প্রয়োজন?</div>
+        <div class="q-en"><span class="lbl"><span class="lang-en">EN</span></span> What is a File System? Why is it needed?</div>
+      </div>
+      <div class="arr">▾</div>
+    </div>
+    <div class="a-block">
+      <hr class="a-divider">
+      <div class="ans-section">
+        <div class="ans-lang-label bn-label">✦ বাংলা উত্তর</div>
+        <p class="bn-text">ফাইল সিস্টেম হলো OS-এর এমন একটি অংশ যা HDD/SSD থেকে ডেটা কীভাবে সংরক্ষণ ও উদ্ধার হবে তা পরিচালনা করে। এটি কাঁচা বিটগুলোকে ফাইল ও ডিরেক্টরিতে সংগঠিত করে।</p>
+        <p class="bn-text">ফাইল সিস্টেম ছাড়া: কোনো ফাইল কোথায় শুরু বা শেষ হয় বোঝা যায় না এবং ব্যবহারকারীদের মধ্যে কোনো নিরাপত্তা থাকে না।</p>
+        <div class="box-green bn-text">উপমা: ফাইল সিস্টেম = লাইব্রেরিয়ান যে প্রতিটি বইকে সঠিক তাকে সাজিয়ে রাখে।</div>
+      </div>
+      <hr class="ans-sep">
+      <div class="ans-section">
+        <div class="ans-lang-label en-label">✦ English Answer</div>
+        <p class="en-text">A file system is the part of the OS that manages how data is stored and retrieved from storage devices (HDD, SSD). It organizes raw bits into meaningful files and directories.</p>
+        <p class="en-text">Without a file system: there is no way to know where a file starts or ends, and there is no security or sharing between users.</p>
+        <div class="box-blue en-text">Analogy: File system = a librarian giving every book a proper shelf address.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q8 -->
+  <div class="qa-card" onclick="tog(this)">
+    <div class="q-block">
+      <div class="q-icon">Q</div>
+      <div class="q-text">
+        <div class="q-bn"><span class="lbl"><span class="lang-bn">বাং</span></span> ফাইল বরাদ্দের তিনটি পদ্ধতি বিস্তারিত ব্যাখ্যা করো।</div>
+        <div class="q-en"><span class="lbl"><span class="lang-en">EN</span></span> Explain the three file allocation methods in detail.</div>
+      </div>
+      <div class="arr">▾</div>
+    </div>
+    <div class="a-block">
+      <hr class="a-divider">
+      <div class="ans-section">
+        <div class="ans-lang-label bn-label">✦ বাংলা উত্তর</div>
+        <ol class="bn-text">
+          <li><strong>Contiguous (ধারাবাহিক):</strong> ফাইল পরপর ডিস্ক ব্লকে থাকে। দ্রুত sequential access। কিন্তু external fragmentation ও ফাইল বড় করা কঠিন।</li>
+          <li><strong>Linked (সংযুক্ত):</strong> প্রতিটি ব্লকে পরবর্তী ব্লকের pointer। Fragmentation নেই, ফাইল সহজে বাড়ানো যায়। কিন্তু random access ধীর।</li>
+          <li><strong>Indexed (সূচিভিত্তিক):</strong> একটি index block-এ সব ডেটা ব্লকের ঠিকানা। দ্রুত random access। তবে index block নিজেই জায়গা নেয়।</li>
+        </ol>
+      </div>
+      <hr class="ans-sep">
+      <div class="ans-section">
+        <div class="ans-lang-label en-label">✦ English Answer</div>
+        <ol class="en-text">
+          <li><strong>Contiguous Allocation:</strong> File stored in consecutive disk blocks. Fast sequential access. But causes external fragmentation and hard to grow files.</li>
+          <li><strong>Linked Allocation:</strong> Each block has a pointer to the next block. No fragmentation and easy to grow. But slow random access and pointer overhead per block.</li>
+          <li><strong>Indexed Allocation:</strong> One index block holds all data block addresses. Fast random access and no fragmentation. But the index block itself takes space; multi-level index needed for very large files.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q9 -->
+  <div class="qa-card" onclick="tog(this)">
+    <div class="q-block">
+      <div class="q-icon">Q</div>
+      <div class="q-text">
+        <div class="q-bn"><span class="lbl"><span class="lang-bn">বাং</span></span> ফ্রি স্পেস ম্যানেজমেন্টের দুটি পদ্ধতি কী কী?</div>
+        <div class="q-en"><span class="lbl"><span class="lang-en">EN</span></span> What are the two methods of Free Space Management?</div>
+      </div>
+      <div class="arr">▾</div>
+    </div>
+    <div class="a-block">
+      <hr class="a-divider">
+      <div class="ans-section">
+        <div class="ans-lang-label bn-label">✦ বাংলা উত্তর</div>
+        <ol class="bn-text">
+          <li><strong>Bit Map:</strong> প্রতিটি ডিস্ক ব্লককে একটি বিট দিয়ে উপস্থাপন করা হয়। 0 = ফ্রি, 1 = ব্যবহৃত। দ্রুত স্ক্যান। সহজ ও কম্প্যাক্ট।</li>
+          <li><strong>Free List:</strong> ফ্রি ব্লকগুলো একটি Linked List-এ থাকে। ফ্রি ব্লক যোগ ও বাদ দেওয়া সহজ। তবে বড় ডিস্কে traversal ধীর।</li>
+        </ol>
+      </div>
+      <hr class="ans-sep">
+      <div class="ans-section">
+        <div class="ans-lang-label en-label">✦ English Answer</div>
+        <ol class="en-text">
+          <li><strong>Bit Map:</strong> Each disk block is represented by one bit: 0 = free, 1 = used. Fast scan to find free blocks. Simple and compact.</li>
+          <li><strong>Free List:</strong> Free blocks are linked together — each free block points to the next. Easy to add/remove free blocks. But traversal can be slow for large disks.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q10 -->
+  <div class="qa-card" onclick="tog(this)">
+    <div class="q-block">
+      <div class="q-icon">Q</div>
+      <div class="q-text">
+        <div class="q-bn"><span class="lbl"><span class="lang-bn">বাং</span></span> ফাইল মেটাডেটা কী? কোন তথ্যগুলো মেটাডেটায় থাকে?</div>
+        <div class="q-en"><span class="lbl"><span class="lang-en">EN</span></span> What is File Metadata? What information does it contain?</div>
+      </div>
+      <div class="arr">▾</div>
+    </div>
+    <div class="a-block">
+      <hr class="a-divider">
+      <div class="ans-section">
+        <div class="ans-lang-label bn-label">✦ বাংলা উত্তর</div>
+        <p class="bn-text">মেটাডেটা হলো "ডেটা সম্পর্কে ডেটা" — ফাইলের প্রকৃত বিষয়বস্তু নয়, বরং ফাইলের তথ্য।</p>
+        <ul class="bn-text">
+          <li>ফাইলের নাম, আকার, ধরন</li>
+          <li>তৈরি ও পরিবর্তনের তারিখ</li>
+          <li>মালিক ও অনুমতি (Read/Write/Execute)</li>
+          <li>ডেটা ব্লকের ডিস্কে অবস্থান</li>
+        </ul>
+      </div>
+      <hr class="ans-sep">
+      <div class="ans-section">
+        <div class="ans-lang-label en-label">✦ English Answer</div>
+        <p class="en-text">Metadata means "data about data" — not the actual file content, but information about the file.</p>
+        <ul class="en-text">
+          <li>File name, size, and type</li>
+          <li>Created and modified date</li>
+          <li>Owner and permissions (Read/Write/Execute)</li>
+          <li>Location of data blocks on disk</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q11 -->
+  <div class="qa-card" onclick="tog(this)">
+    <div class="q-block">
+      <div class="q-icon">Q</div>
+      <div class="q-text">
+        <div class="q-bn"><span class="lbl"><span class="lang-bn">বাং</span></span> NTFS, ext4 ও FAT32 ফাইল সিস্টেমের মধ্যে পার্থক্য কী?</div>
+        <div class="q-en"><span class="lbl"><span class="lang-en">EN</span></span> What are the differences between NTFS, ext4, and FAT32 file systems?</div>
+      </div>
+      <div class="arr">▾</div>
+    </div>
+    <div class="a-block">
+      <hr class="a-divider">
+      <div class="ans-section">
+        <div class="ans-lang-label bn-label">✦ বাংলা উত্তর</div>
+        <ul class="bn-text">
+          <li><strong>NTFS (Windows):</strong> অনুমতি, বড় ফাইল ও journaling সমর্থন করে।</li>
+          <li><strong>ext4 (Linux):</strong> দ্রুত, journaling সমর্থিত, ব্যাপকভাবে ব্যবহৃত।</li>
+          <li><strong>FAT32 (USB Drive):</strong> সহজ, সব OS-এ সামঞ্জস্যপূর্ণ, তবে 4GB-এর বেশি ফাইল সমর্থন করে না।</li>
+        </ul>
+      </div>
+      <hr class="ans-sep">
+      <div class="ans-section">
+        <div class="ans-lang-label en-label">✦ English Answer</div>
+        <ul class="en-text">
+          <li><strong>NTFS (Windows):</strong> Supports permissions, large files, and journaling for reliability.</li>
+          <li><strong>ext4 (Linux):</strong> Fast, supports journaling, widely used in Linux systems.</li>
+          <li><strong>FAT32 (USB Drives):</strong> Simple, highly compatible across all OS, but cannot store files larger than 4GB.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div><!-- /ch2 -->
+
+
+<!-- ══════════════════════════════════════════
+     CHAPTER 3
+══════════════════════════════════════════ -->
+<div class="chapter ch3">
+  <div class="chapter-header">
+    <div class="ch-num">৩</div>
+    <div class="ch-title">
+      <div class="bn-title">প্রসেস ও থ্রেড</div>
+      <div class="en-title">Processes and Threads</div>
+    </div>
+  </div>
+
+  <!-- Q12 -->
+  <div class="qa-card" onclick="tog(this)">
+    <div class="q-block">
+      <div class="q-icon">Q</div>
+      <div class="q-text">
+        <div class="q-bn"><span class="lbl"><span class="lang-bn">বাং</span></span> প্রসেস কী? প্রসেসের বিভিন্ন অবস্থাগুলো বর্ণনা করো।</div>
+        <div class="q-en"><span class="lbl"><span class="lang-en">EN</span></span> What is a Process? Describe the different process states.</div>
+      </div>
+      <div class="arr">▾</div>
+    </div>
+    <div class="a-block">
+      <hr class="a-divider">
+      <div class="ans-section">
+        <div class="ans-lang-label bn-label">✦ বাংলা উত্তর</div>
+        <p class="bn-text">প্রসেস হলো একটি <strong>চলমান প্রোগ্রাম</strong> যার নিজস্ব মেমোরি স্পেস ও রিসোর্স রয়েছে (Code, Data, Stack, Heap)।</p>
+        <ol class="bn-text">
+          <li><strong>New:</strong> প্রসেস তৈরি হয়েছে।</li>
+          <li><strong>Ready:</strong> CPU পাওয়ার জন্য অপেক্ষা করছে।</li>
+          <li><strong>Running:</strong> CPU-তে সক্রিয়ভাবে চলছে।</li>
+          <li><strong>Waiting:</strong> I/O বা কোনো ঘটনার জন্য অপেক্ষা করছে।</li>
+          <li><strong>Terminated:</strong> সম্পন্ন হয়েছে।</li>
+        </ol>
+        <div class="box-green bn-text">রূপান্তর: Ready→Running (CPU পেলে), Running→Waiting (I/O লাগলে), Waiting→Ready (I/O শেষে)।</div>
+      </div>
+      <hr class="ans-sep">
+      <div class="ans-section">
+        <div class="ans-lang-label en-label">✦ English Answer</div>
+        <p class="en-text">A process is a <strong>program in execution</strong> with its own memory space and resources (Code, Data, Stack, Heap).</p>
+        <ol class="en-text">
+          <li><strong>New:</strong> The process is being created.</li>
+          <li><strong>Ready:</strong> Waiting to be assigned the CPU.</li>
+          <li><strong>Running:</strong> Currently executing on the CPU.</li>
+          <li><strong>Waiting:</strong> Waiting for I/O or an event.</li>
+          <li><strong>Terminated:</strong> Finished execution.</li>
+        </ol>
+        <div class="box-blue en-text">Transitions: Ready→Running (CPU allocated), Running→Waiting (I/O needed), Waiting→Ready (I/O complete).</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q13 -->
+  <div class="qa-card" onclick="tog(this)">
+    <div class="q-block">
+      <div class="q-icon">Q</div>
+      <div class="q-text">
+        <div class="q-bn"><span class="lbl"><span class="lang-bn">বাং</span></span> PCB (Process Control Block) কী? এতে কী কী তথ্য থাকে?</div>
+        <div class="q-en"><span class="lbl"><span class="lang-en">EN</span></span> What is a PCB (Process Control Block)? What information does it store?</div>
+      </div>
+      <div class="arr">▾</div>
+    </div>
+    <div class="a-block">
+      <hr class="a-divider">
+      <div class="ans-section">
+        <div class="ans-lang-label bn-label">✦ বাংলা উত্তর</div>
+        <p class="bn-text">PCB হলো OS-এর পরিচালনার জন্য একটি প্রসেস সম্পর্কে সংরক্ষিত সব তথ্যের সমষ্টি।</p>
+        <ul class="bn-text">
+          <li><strong>Process ID (PID):</strong> অনন্য শনাক্তকারী</li>
+          <li><strong>State:</strong> প্রসেসের বর্তমান অবস্থা</li>
+          <li><strong>CPU Registers:</strong> Context switching-এর জন্য রেজিস্টার মান</li>
+          <li><strong>Memory Info:</strong> বেস ও লিমিট ঠিকানা</li>
+          <li><strong>Priority:</strong> শিডিউলিং অগ্রাধিকার</li>
+          <li><strong>I/O Status:</strong> খোলা ফাইল ও ডিভাইস</li>
+        </ul>
+      </div>
+      <hr class="ans-sep">
+      <div class="ans-section">
+        <div class="ans-lang-label en-label">✦ English Answer</div>
+        <p class="en-text">A PCB stores all information the OS needs to manage a process.</p>
+        <ul class="en-text">
+          <li><strong>Process ID (PID):</strong> Unique identifier</li>
+          <li><strong>State:</strong> Current process state</li>
+          <li><strong>CPU Registers:</strong> Register values for context switching</li>
+          <li><strong>Memory Info:</strong> Base and limit addresses</li>
+          <li><strong>Priority:</strong> Scheduling priority level</li>
+          <li><strong>I/O Status:</strong> Open files and devices</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q14 -->
+  <div class="qa-card" onclick="tog(this)">
+    <div class="q-block">
+      <div class="q-icon">Q</div>
+      <div class="q-text">
+        <div class="q-bn"><span class="lbl"><span class="lang-bn">বাং</span></span> প্রসেস ও থ্রেডের মধ্যে পার্থক্য কী?</div>
+        <div class="q-en"><span class="lbl"><span class="lang-en">EN</span></span> What are the differences between a Process and a Thread?</div>
+      </div>
+      <div class="arr">▾</div>
+    </div>
+    <div class="a-block">
+      <hr class="a-divider">
+      <div class="ans-section">
+        <div class="ans-lang-label bn-label">✦ বাংলা উত্তর</div>
+        <ul class="bn-text">
+          <li><strong>মেমোরি:</strong> প্রসেসের আলাদা মেমোরি; থ্রেড মেমোরি শেয়ার করে।</li>
+          <li><strong>গতি:</strong> প্রসেস তৈরি ধীর; থ্রেড তৈরি দ্রুত।</li>
+          <li><strong>Context Switch:</strong> প্রসেসে ব্যয়বহুল; থ্রেডে সস্তা।</li>
+          <li><strong>যোগাযোগ:</strong> প্রসেসে IPC লাগে; থ্রেডে শেয়ারড মেমোরি।</li>
+          <li><strong>ওভারহেড:</strong> প্রসেসে বেশি; থ্রেডে কম।</li>
+        </ul>
+      </div>
+      <hr class="ans-sep">
+      <div class="ans-section">
+        <div class="ans-lang-label en-label">✦ English Answer</div>
+        <ul class="en-text">
+          <li><strong>Memory:</strong> Processes have separate memory; threads share memory.</li>
+          <li><strong>Speed:</strong> Processes are slower to create; threads are faster.</li>
+          <li><strong>Context Switch:</strong> Expensive for processes; cheap for threads.</li>
+          <li><strong>Communication:</strong> Processes need IPC; threads use shared memory.</li>
+          <li><strong>Overhead:</strong> Processes have high overhead; threads have low overhead.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q15 -->
+  <div class="qa-card" onclick="tog(this)">
+    <div class="q-block">
+      <div class="q-icon">Q</div>
+      <div class="q-text">
+        <div class="q-bn"><span class="lbl"><span class="lang-bn">বাং</span></span> মাল্টিথ্রেডিং কী? এর সুবিধা ও অসুবিধাগুলো কী?</div>
+        <div class="q-en"><span class="lbl"><span class="lang-en">EN</span></span> What is Multithreading? What are its advantages and disadvantages?</div>
+      </div>
+      <div class="arr">▾</div>
+    </div>
+    <div class="a-block">
+      <hr class="a-divider">
+      <div class="ans-section">
+        <div class="ans-lang-label bn-label">✦ বাংলা উত্তর</div>
+        <p class="bn-text">মাল্টিথ্রেডিং হলো একটি প্রসেসের মধ্যে একাধিক থ্রেড ব্যবহার করে একই সময়ে একাধিক কাজ সম্পন্ন করা।</p>
+        <p class="bn-text"><strong>সুবিধা:</strong> দ্রুত সম্পাদন, উন্নত CPU ব্যবহার, রেসপন্সিভনেস, রিসোর্স শেয়ারিং, মাল্টিকোরে স্কেলেবিলিটি।</p>
+        <p class="bn-text"><strong>অসুবিধা:</strong> জটিলতা, Race Condition, Deadlock, ডিবাগ কঠিন, সিঙ্ক্রোনাইজেশন ওভারহেড।</p>
+      </div>
+      <hr class="ans-sep">
+      <div class="ans-section">
+        <div class="ans-lang-label en-label">✦ English Answer</div>
+        <p class="en-text">Multithreading means using multiple threads within a single process to achieve concurrent execution.</p>
+        <p class="en-text"><strong>Advantages:</strong> Faster execution, better CPU utilization, improved responsiveness, resource sharing, scalability on multicore systems.</p>
+        <p class="en-text"><strong>Disadvantages:</strong> Increased complexity, race conditions, deadlock risk, difficult debugging, synchronization overhead.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q16 -->
+  <div class="qa-card" onclick="tog(this)">
+    <div class="q-block">
+      <div class="q-icon">Q</div>
+      <div class="q-text">
+        <div class="q-bn"><span class="lbl"><span class="lang-bn">বাং</span></span> Amdahl's Law কী? উদাহরণসহ ব্যাখ্যা করো।</div>
+        <div class="q-en"><span class="lbl"><span class="lang-en">EN</span></span> What is Amdahl's Law? Explain with an example.</div>
+      </div>
+      <div class="arr">▾</div>
+    </div>
+    <div class="a-block">
+      <hr class="a-divider">
+      <div class="ans-section">
+        <div class="ans-lang-label bn-label">✦ বাংলা উত্তর</div>
+        <p class="bn-text">Amdahl's Law দেখায় N সংখ্যক থ্রেড দিয়ে একটি প্রোগ্রাম কতটুকু দ্রুত হতে পারে।</p>
+        <p class="bn-text"><strong>সূত্র:</strong> S = 1 / [(1 − P) + (P / N)] যেখানে S = স্পিডআপ, P = প্যারালেলাইজযোগ্য অংশ, N = কোর সংখ্যা।</p>
+        <div class="box-green bn-text">উদাহরণ: P=0.8, N=4 হলে S = 1/[0.2+0.2] = 2.5x দ্রুত। অসীম কোরেও সর্বোচ্চ = 1/(1-P) = 5x।</div>
+      </div>
+      <hr class="ans-sep">
+      <div class="ans-section">
+        <div class="ans-lang-label en-label">✦ English Answer</div>
+        <p class="en-text">Amdahl's Law shows the theoretical speedup of a program using N threads/cores.</p>
+        <p class="en-text"><strong>Formula:</strong> S = 1 / [(1 − P) + (P / N)] where S = Speedup, P = parallelizable fraction, N = number of cores.</p>
+        <div class="box-blue en-text">Example: P=0.8, N=4 → S = 1/[0.2+0.2] = 2.5x faster. Even with infinite cores, max speedup = 1/(1-P) = 5x.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q17 -->
+  <div class="qa-card" onclick="tog(this)">
+    <div class="q-block">
+      <div class="q-icon">Q</div>
+      <div class="q-text">
+        <div class="q-bn"><span class="lbl"><span class="lang-bn">বাং</span></span> Mutex, Semaphore ও Monitor-এর মধ্যে পার্থক্য লেখো।</div>
+        <div class="q-en"><span class="lbl"><span class="lang-en">EN</span></span> Differentiate between Mutex, Semaphore, and Monitor.</div>
+      </div>
+      <div class="arr">▾</div>
+    </div>
+    <div class="a-block">
+      <hr class="a-divider">
+      <div class="ans-section">
+        <div class="ans-lang-label bn-label">✦ বাংলা উত্তর</div>
+        <ul class="bn-text">
+          <li><strong>Mutex:</strong> বাইনারি লক। একবারে একটি থ্রেড। Deadlock-এর ঝুঁকি।</li>
+          <li><strong>Semaphore:</strong> কাউন্টার-ভিত্তিক। Wait/Signal অপারেশন। সাধারণ সিঙ্ক্রোনাইজেশনের জন্য।</li>
+          <li><strong>Monitor:</strong> উচ্চ-স্তরের অ্যাবস্ট্রাকশন। Condition variable সমর্থন। Java-তে ব্যবহৃত।</li>
+        </ul>
+      </div>
+      <hr class="ans-sep">
+      <div class="ans-section">
+        <div class="ans-lang-label en-label">✦ English Answer</div>
+        <ul class="en-text">
+          <li><strong>Mutex:</strong> Binary lock — only one thread at a time. Risk of deadlock.</li>
+          <li><strong>Semaphore:</strong> Counter-based with Wait/Signal operations. Used for general synchronization.</li>
+          <li><strong>Monitor:</strong> High-level abstraction with condition variables. Supported in languages like Java.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div><!-- /ch3 -->
+
+
+<!-- ══════════════════════════════════════════
+     CHAPTER 4
+══════════════════════════════════════════ -->
+<div class="chapter ch4">
+  <div class="chapter-header">
+    <div class="ch-num">৪</div>
+    <div class="ch-title">
+      <div class="bn-title">CPU শিডিউলিং অ্যালগরিদম</div>
+      <div class="en-title">CPU Scheduling Algorithm — Comparative Analysis</div>
+    </div>
+  </div>
+
+  <!-- Q18 -->
+  <div class="qa-card" onclick="tog(this)">
+    <div class="q-block">
+      <div class="q-icon">Q</div>
+      <div class="q-text">
+        <div class="q-bn"><span class="lbl"><span class="lang-bn">বাং</span></span> CPU শিডিউলিং কী? মূল সূত্রগুলো কী?</div>
+        <div class="q-en"><span class="lbl"><span class="lang-en">EN</span></span> What is CPU Scheduling? What are the key formulas?</div>
+      </div>
+      <div class="arr">▾</div>
+    </div>
+    <div class="a-block">
+      <hr class="a-divider">
+      <div class="ans-section">
+        <div class="ans-lang-label bn-label">✦ বাংলা উত্তর</div>
+        <p class="bn-text">CPU শিডিউলিং হলো OS-এর সেই প্রক্রিয়া যেখানে কোন প্রসেস কখন CPU পাবে তা নির্ধারণ করা হয়। লক্ষ্য: CPU ব্যবহার সর্বাধিক ও Waiting Time ন্যূনতম করা।</p>
+        <ul class="bn-text">
+          <li><strong>TAT (Turnaround Time) = CT − AT</strong></li>
+          <li><strong>WT (Waiting Time) = TAT − BT</strong></li>
+        </ul>
+      </div>
+      <hr class="ans-sep">
+      <div class="ans-section">
+        <div class="ans-lang-label en-label">✦ English Answer</div>
+        <p class="en-text">CPU Scheduling is the OS process of deciding which process gets the CPU and for how long. Goal: maximize CPU utilization, minimize waiting and turnaround time.</p>
+        <ul class="en-text">
+          <li><strong>TAT (Turnaround Time) = CT − AT</strong> (Completion Time − Arrival Time)</li>
+          <li><strong>WT (Waiting Time) = TAT − BT</strong> (Turnaround Time − Burst Time)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q19 -->
+  <div class="qa-card" onclick="tog(this)">
+    <div class="q-block">
+      <div class="q-icon">Q</div>
+      <div class="q-text">
+        <div class="q-bn"><span class="lbl"><span class="lang-bn">বাং</span></span> FCFS অ্যালগরিদম কী? Convoy Effect কী?</div>
+        <div class="q-en"><span class="lbl"><span class="lang-en">EN</span></span> What is the FCFS algorithm? What is the Convoy Effect?</div>
+      </div>
+      <div class="arr">▾</div>
+    </div>
+    <div class="a-block">
+      <hr class="a-divider">
+      <div class="ans-section">
+        <div class="ans-lang-label bn-label">✦ বাংলা উত্তর</div>
+        <p class="bn-text"><strong>FCFS:</strong> যে প্রসেস আগে আসে সে আগে CPU পায়। Non-preemptive — একবার শুরু হলে শেষ পর্যন্ত চলে।</p>
+        <p class="bn-text"><strong>Convoy Effect:</strong> একটি বড় প্রসেসের পিছনে ছোট প্রসেসগুলো দীর্ঘ সময় আটকে যায়। উদাহরণের গড়: Avg TAT = 8.33ms, Avg WT = 4.33ms।</p>
+      </div>
+      <hr class="ans-sep">
+      <div class="ans-section">
+        <div class="ans-lang-label en-label">✦ English Answer</div>
+        <p class="en-text"><strong>FCFS (First Come First Served):</strong> The process that arrives first gets the CPU first. Non-preemptive — once started, runs to completion.</p>
+        <p class="en-text"><strong>Convoy Effect:</strong> Short processes get stuck waiting behind a long-running process, increasing average waiting time. Example averages: Avg TAT = 8.33ms, Avg WT = 4.33ms.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q20 -->
+  <div class="qa-card" onclick="tog(this)">
+    <div class="q-block">
+      <div class="q-icon">Q</div>
+      <div class="q-text">
+        <div class="q-bn"><span class="lbl"><span class="lang-bn">বাং</span></span> SJF ও SRTF অ্যালগরিদমের পার্থক্য লেখো।</div>
+        <div class="q-en"><span class="lbl"><span class="lang-en">EN</span></span> Differentiate between SJF and SRTF scheduling algorithms.</div>
+      </div>
+      <div class="arr">▾</div>
+    </div>
+    <div class="a-block">
+      <hr class="a-divider">
+      <div class="ans-section">
+        <div class="ans-lang-label bn-label">✦ বাংলা উত্তর</div>
+        <ul class="bn-text">
+          <li><strong>SJF:</strong> Non-preemptive। সবচেয়ে কম Burst Time যার সে আগে। একবার শুরু হলে বাধা দেওয়া যায় না। Avg WT = 3.67ms।</li>
+          <li><strong>SRTF:</strong> SJF-এর Preemptive সংস্করণ। নতুন প্রসেস এলে বর্তমান বাকি সময়ের সাথে তুলনা করে। কম BT হলে চলমান প্রসেস থামিয়ে নতুনটি শুরু।</li>
+        </ul>
+        <div class="box-green bn-text">উভয়তেই Starvation-এর ঝুঁকি — বড় প্রসেস CPU নাও পেতে পারে।</div>
+      </div>
+      <hr class="ans-sep">
+      <div class="ans-section">
+        <div class="ans-lang-label en-label">✦ English Answer</div>
+        <ul class="en-text">
+          <li><strong>SJF (Shortest Job First):</strong> Non-preemptive. Among available processes, picks the shortest burst time. Once started, runs to completion. Avg WT = 3.67ms.</li>
+          <li><strong>SRTF (Shortest Remaining Time First):</strong> Preemptive version of SJF. On every new arrival, if new BT &lt; remaining time of running process, preempt immediately.</li>
+        </ul>
+        <div class="box-blue en-text">Both risk Starvation — longer jobs may never get CPU time.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q21 -->
+  <div class="qa-card" onclick="tog(this)">
+    <div class="q-block">
+      <div class="q-icon">Q</div>
+      <div class="q-text">
+        <div class="q-bn"><span class="lbl"><span class="lang-bn">বাং</span></span> Round Robin অ্যালগরিদম কী? এর মূল বৈশিষ্ট্য কী?</div>
+        <div class="q-en"><span class="lbl"><span class="lang-en">EN</span></span> What is the Round Robin algorithm? What are its key features?</div>
+      </div>
+      <div class="arr">▾</div>
+    </div>
+    <div class="a-block">
+      <hr class="a-divider">
+      <div class="ans-section">
+        <div class="ans-lang-label bn-label">✦ বাংলা উত্তর</div>
+        <p class="bn-text">প্রতিটি প্রসেসকে একটি নির্দিষ্ট সময় (Time Quantum/TQ) দেওয়া হয়। TQ শেষে প্রসেস Queue-এর শেষে যায়।</p>
+        <ul class="bn-text">
+          <li>Preemptive — সবার জন্য ন্যায্য।</li>
+          <li>কোনো প্রসেস (n−1)×TQ-এর বেশি অপেক্ষা করে না।</li>
+          <li>Time-sharing ও interactive সিস্টেমের জন্য সেরা।</li>
+          <li>কোনো Starvation নেই।</li>
+        </ul>
+        <div class="box-green bn-text">TQ=2ms উদাহরণে: Avg TAT = 8.33ms, Avg WT = 5.00ms — Starvation নেই।</div>
+      </div>
+      <hr class="ans-sep">
+      <div class="ans-section">
+        <div class="ans-lang-label en-label">✦ English Answer</div>
+        <p class="en-text">Every process gets a fixed time slice (Time Quantum/TQ). After TQ expires, the process moves to the end of the queue.</p>
+        <ul class="en-text">
+          <li>Preemptive — fairness guaranteed for all processes.</li>
+          <li>No process waits longer than (n−1)×TQ.</li>
+          <li>Best suited for time-sharing and interactive systems.</li>
+          <li>No starvation.</li>
+        </ul>
+        <div class="box-blue en-text">With TQ=2ms example: Avg TAT = 8.33ms, Avg WT = 5.00ms — zero starvation.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q22 -->
+  <div class="qa-card" onclick="tog(this)">
+    <div class="q-block">
+      <div class="q-icon">Q</div>
+      <div class="q-text">
+        <div class="q-bn"><span class="lbl"><span class="lang-bn">বাং</span></span> Starvation কী? Aging দিয়ে কীভাবে সমাধান করা হয়?</div>
+        <div class="q-en"><span class="lbl"><span class="lang-en">EN</span></span> What is Starvation? How does Aging solve it?</div>
+      </div>
+      <div class="arr">▾</div>
+    </div>
+    <div class="a-block">
+      <hr class="a-divider">
+      <div class="ans-section">
+        <div class="ans-lang-label bn-label">✦ বাংলা উত্তর</div>
+        <p class="bn-text"><strong>Starvation:</strong> কম অগ্রাধিকারের প্রসেস কখনো CPU পায় না কারণ উচ্চ অগ্রাধিকারের প্রসেসগুলো বারবার আসে। SJF, Priority ও SRTF-এ ঘটে।</p>
+        <p class="bn-text"><strong>Aging:</strong> অপেক্ষারত প্রসেসের অগ্রাধিকার ধীরে ধীরে বাড়ানো হয়। যত বেশি অপেক্ষা, তত বেশি অগ্রাধিকার — একপর্যায়ে CPU পায়। MLFQ-তে ব্যবহৃত।</p>
+      </div>
+      <hr class="ans-sep">
+      <div class="ans-section">
+        <div class="ans-lang-label en-label">✦ English Answer</div>
+        <p class="en-text"><strong>Starvation:</strong> A low-priority process never gets the CPU because higher-priority processes keep arriving. Occurs in SJF, Priority, and SRTF.</p>
+        <p class="en-text"><strong>Aging:</strong> Gradually increase the priority of waiting processes. The longer a process waits, the higher it climbs — eventually gets the CPU. Used in MLFQ.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q23 -->
+  <div class="qa-card" onclick="tog(this)">
+    <div class="q-block">
+      <div class="q-icon">Q</div>
+      <div class="q-text">
+        <div class="q-bn"><span class="lbl"><span class="lang-bn">বাং</span></span> MLQ ও MLFQ-এর পার্থক্য কী? Linux কোনটি ব্যবহার করে?</div>
+        <div class="q-en"><span class="lbl"><span class="lang-en">EN</span></span> What is the difference between MLQ and MLFQ? Which does Linux use?</div>
+      </div>
+      <div class="arr">▾</div>
+    </div>
+    <div class="a-block">
+      <hr class="a-divider">
+      <div class="ans-section">
+        <div class="ans-lang-label bn-label">✦ বাংলা উত্তর</div>
+        <p class="bn-text"><strong>MLQ:</strong> একাধিক Queue, প্রতিটির আলাদা অগ্রাধিকার। প্রসেস একবার Queue-এ গেলে আর নড়তে পারে না।</p>
+        <p class="bn-text"><strong>MLFQ:</strong> প্রসেস Queue-এর মধ্যে চলাচল করতে পারে। বেশি CPU ব্যবহারে নামানো হয়, বেশি অপেক্ষায় তোলা হয় (Aging)। সবচেয়ে নমনীয়।</p>
+        <div class="box-green bn-text">Windows: MLFQ (32 স্তর)। Linux: CFS (Completely Fair Scheduler) — Red-Black Tree ডেটা স্ট্রাকচার।</div>
+      </div>
+      <hr class="ans-sep">
+      <div class="ans-section">
+        <div class="ans-lang-label en-label">✦ English Answer</div>
+        <p class="en-text"><strong>MLQ:</strong> Multiple queues each with their own priority and algorithm. Processes are permanently assigned to one queue — no movement allowed.</p>
+        <p class="en-text"><strong>MLFQ:</strong> Processes can move between queues. Too much CPU usage → demoted. Too long waiting → promoted (Aging). Most flexible and realistic.</p>
+        <div class="box-blue en-text">Windows uses MLFQ (32 priority levels). Linux uses CFS (Completely Fair Scheduler) with a Red-Black Tree data structure.</div>
+      </div>
+    </div>
+  </div>
+</div><!-- /ch4 -->
+
+
+<!-- ══════════════════════════════════════════
+     CHAPTER 5
+══════════════════════════════════════════ -->
+<div class="chapter ch5">
+  <div class="chapter-header">
+    <div class="ch-num">৫</div>
+    <div class="ch-title">
+      <div class="bn-title">ডেডলক ডিটেকশন ও অ্যাভয়ডেন্স</div>
+      <div class="en-title">Deadlock Detection and Avoidance</div>
+    </div>
+  </div>
+
+  <!-- Q24 -->
+  <div class="qa-card" onclick="tog(this)">
+    <div class="q-block">
+      <div class="q-icon">Q</div>
+      <div class="q-text">
+        <div class="q-bn"><span class="lbl"><span class="lang-bn">বাং</span></span> ডেডলক কী? ডেডলকের চারটি আবশ্যিক শর্ত কী কী?</div>
+        <div class="q-en"><span class="lbl"><span class="lang-en">EN</span></span> What is Deadlock? What are its four necessary conditions?</div>
+      </div>
+      <div class="arr">▾</div>
+    </div>
+    <div class="a-block">
+      <hr class="a-divider">
+      <div class="ans-section">
+        <div class="ans-lang-label bn-label">✦ বাংলা উত্তর</div>
+        <p class="bn-text">ডেডলক হলো এমন পরিস্থিতি যেখানে একটি প্রসেস অপেক্ষার অবস্থায় আটকে যায় কারণ যে রিসোর্সটি সে চাইছে সেটি অন্য একটি অপেক্ষারত প্রসেস ধরে আছে।</p>
+        <ol class="bn-text">
+          <li><strong>Mutual Exclusion:</strong> রিসোর্স একবারে একটি প্রসেসই ব্যবহার করতে পারে।</li>
+          <li><strong>Hold and Wait:</strong> প্রসেস একটি রিসোর্স ধরে রেখে আরেকটির জন্য অপেক্ষা করছে।</li>
+          <li><strong>No Preemption:</strong> প্রসেস নিজে থেকে না ছাড়লে রিসোর্স কেড়ে নেওয়া যায় না।</li>
+          <li><strong>Circular Wait:</strong> P1→R1→P2→R2→P1 — একটি চক্র তৈরি হয়।</li>
+        </ol>
+        <div class="box-green bn-text">এই চারটি শর্ত একসাথে থাকলেই ডেডলক সম্ভব।</div>
+      </div>
+      <hr class="ans-sep">
+      <div class="ans-section">
+        <div class="ans-lang-label en-label">✦ English Answer</div>
+        <p class="en-text">Deadlock occurs when a process enters a waiting state because a requested resource is held by another waiting process, which in turn is waiting for another resource.</p>
+        <ol class="en-text">
+          <li><strong>Mutual Exclusion:</strong> Only one process can use a resource at a time.</li>
+          <li><strong>Hold and Wait:</strong> A process holds one resource while waiting for another.</li>
+          <li><strong>No Preemption:</strong> A resource cannot be taken away unless the process releases it voluntarily.</li>
+          <li><strong>Circular Wait:</strong> P1→R1→P2→R2→P1 — a circular chain of waiting.</li>
+        </ol>
+        <div class="box-blue en-text">All four conditions must hold simultaneously for deadlock to occur.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q25 -->
+  <div class="qa-card" onclick="tog(this)">
+    <div class="q-block">
+      <div class="q-icon">Q</div>
+      <div class="q-text">
+        <div class="q-bn"><span class="lbl"><span class="lang-bn">বাং</span></span> ডেডলক হ্যান্ডলিংয়ের চারটি পদ্ধতি কী কী?</div>
+        <div class="q-en"><span class="lbl"><span class="lang-en">EN</span></span> What are the four methods of handling Deadlock?</div>
+      </div>
+      <div class="arr">▾</div>
+    </div>
+    <div class="a-block">
+      <hr class="a-divider">
+      <div class="ans-section">
+        <div class="ans-lang-label bn-label">✦ বাংলা উত্তর</div>
+        <ol class="bn-text">
+          <li><strong>Deadlock Ignorance:</strong> সিস্টেম ডেডলক উপেক্ষা করে।</li>
+          <li><strong>Deadlock Prevention:</strong> সিস্টেম এমনভাবে ডিজাইন যাতে ডেডলক হতেই না পারে।</li>
+          <li><strong>Deadlock Avoidance:</strong> আগে থেকে পরীক্ষা করে ডেডলক হবে কি না দেখা হয়।</li>
+          <li><strong>Deadlock Detection:</strong> ডেডলক হতে দেওয়া হয়, তারপর শনাক্ত করে ঠিক করা হয়।</li>
+        </ol>
+      </div>
+      <hr class="ans-sep">
+      <div class="ans-section">
+        <div class="ans-lang-label en-label">✦ English Answer</div>
+        <ol class="en-text">
+          <li><strong>Deadlock Ignorance:</strong> The system simply ignores deadlocks.</li>
+          <li><strong>Deadlock Prevention:</strong> The system is designed so deadlock can never occur.</li>
+          <li><strong>Deadlock Avoidance:</strong> The system checks in advance whether a deadlock might occur before granting resources.</li>
+          <li><strong>Deadlock Detection:</strong> Deadlock is allowed to occur, then detected and fixed.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q26 -->
+  <div class="qa-card" onclick="tog(this)">
+    <div class="q-block">
+      <div class="q-icon">Q</div>
+      <div class="q-text">
+        <div class="q-bn"><span class="lbl"><span class="lang-bn">বাং</span></span> Banker's Algorithm কীভাবে কাজ করে?</div>
+        <div class="q-en"><span class="lbl"><span class="lang-en">EN</span></span> How does the Banker's Algorithm work?</div>
+      </div>
+      <div class="arr">▾</div>
+    </div>
+    <div class="a-block">
+      <hr class="a-divider">
+      <div class="ans-section">
+        <div class="ans-lang-label bn-label">✦ বাংলা উত্তর</div>
+        <p class="bn-text">Banker's Algorithm হলো ডেডলক অ্যাভয়ডেন্সের একটি কৌশল। ব্যাংক যেমন নিশ্চিত করে সব গ্রাহকের চাহিদা মেটাতে পারবে তবেই ঋণ দেয় — ঠিক তেমনি।</p>
+        <ul class="bn-text">
+          <li>প্রতিটি প্রসেসের সর্বোচ্চ রিসোর্স আগেই ঘোষণা করতে হয়।</li>
+          <li>Current Need = Max Need − Allocated Resource</li>
+          <li>"Safe State"-এ থাকলেই রিসোর্স বরাদ্দ দেওয়া হয়।</li>
+        </ul>
+        <div class="box-green bn-text">Safe State = ডেডলক হবে না। Unsafe State = ডেডলকের সম্ভাবনা।</div>
+      </div>
+      <hr class="ans-sep">
+      <div class="ans-section">
+        <div class="ans-lang-label en-label">✦ English Answer</div>
+        <p class="en-text">The Banker's Algorithm is a deadlock avoidance strategy — named because it mimics how a bank ensures it can satisfy all customers' needs before lending money.</p>
+        <ul class="en-text">
+          <li>Each process must declare its maximum resource needs upfront.</li>
+          <li>Current Need = Max Need − Allocated Resource</li>
+          <li>Resources are granted only if the system remains in a "Safe State".</li>
+        </ul>
+        <div class="box-blue en-text">Safe State = no deadlock will occur. Unsafe State = deadlock may occur.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q27 -->
+  <div class="qa-card" onclick="tog(this)">
+    <div class="q-block">
+      <div class="q-icon">Q</div>
+      <div class="q-text">
+        <div class="q-bn"><span class="lbl"><span class="lang-bn">বাং</span></span> Resource Allocation Graph (RAG) কী? ডেডলক শনাক্তে কীভাবে ব্যবহৃত হয়?</div>
+        <div class="q-en"><span class="lbl"><span class="lang-en">EN</span></span> What is a Resource Allocation Graph (RAG)? How is it used to detect deadlocks?</div>
+      </div>
+      <div class="arr">▾</div>
+    </div>
+    <div class="a-block">
+      <hr class="a-divider">
+      <div class="ans-section">
+        <div class="ans-lang-label bn-label">✦ বাংলা উত্তর</div>
+        <p class="bn-text">RAG হলো একটি চিত্র যেখানে কোন প্রসেস কোন রিসোর্স ধরে আছে এবং কোনটির জন্য অপেক্ষা করছে তা দেখানো হয়।</p>
+        <ul class="bn-text">
+          <li><strong>Allocation Edge (R→P):</strong> রিসোর্স R, প্রসেস P-কে বরাদ্দ।</li>
+          <li><strong>Request Edge (P→R):</strong> প্রসেস P, রিসোর্স R চাইছে।</li>
+        </ul>
+        <div class="box-green bn-text">গ্রাফে Cycle থাকলে → Single Instance-এ সবসময় Deadlock। Multiple Instance-এ হতেও পারে, নাও পারে।</div>
+      </div>
+      <hr class="ans-sep">
+      <div class="ans-section">
+        <div class="ans-lang-label en-label">✦ English Answer</div>
+        <p class="en-text">A RAG is a visual representation showing which processes hold which resources and which processes are waiting for them.</p>
+        <ul class="en-text">
+          <li><strong>Allocation Edge (R→P):</strong> Resource R is allocated to Process P.</li>
+          <li><strong>Request Edge (P→R):</strong> Process P is requesting Resource R.</li>
+        </ul>
+        <div class="box-blue en-text">If a cycle exists → Deadlock is certain for single-instance resources. For multiple-instance resources, a cycle indicates a possibility but not certainty.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q28 -->
+  <div class="qa-card" onclick="tog(this)">
+    <div class="q-block">
+      <div class="q-icon">Q</div>
+      <div class="q-text">
+        <div class="q-bn"><span class="lbl"><span class="lang-bn">বাং</span></span> ডেডলক Avoidance ও Detection-এর মধ্যে পার্থক্য কী?</div>
+        <div class="q-en"><span class="lbl"><span class="lang-en">EN</span></span> Compare Deadlock Avoidance and Deadlock Detection.</div>
+      </div>
+      <div class="arr">▾</div>
+    </div>
+    <div class="a-block">
+      <hr class="a-divider">
+      <div class="ans-section">
+        <div class="ans-lang-label bn-label">✦ বাংলা উত্তর</div>
+        <ul class="bn-text">
+          <li><strong>Avoidance:</strong> প্রতিটি রিকোয়েস্টের আগে Safe State পরীক্ষা করে। প্রসেসকে সর্বোচ্চ চাহিদা আগেই জানাতে হয়। নিচু রিসোর্স ব্যবহার। নিরাপত্তামূলক সিস্টেমের জন্য।</li>
+          <li><strong>Detection:</strong> প্রসেসকে স্বাধীনভাবে রিসোর্স নিতে দেয়। পর্যায়ক্রমে ডেডলক পরীক্ষা করে। বেশি রিসোর্স ব্যবহার। আধুনিক OS-এ বাস্তবসম্মত।</li>
+        </ul>
+        <div class="box-green bn-text">Avoidance = "প্রতিকারের চেয়ে প্রতিরোধ উত্তম" | Detection = "আশাবাদী পদ্ধতি"।</div>
+      </div>
+      <hr class="ans-sep">
+      <div class="ans-section">
+        <div class="ans-lang-label en-label">✦ English Answer</div>
+        <ul class="en-text">
+          <li><strong>Avoidance (Proactive):</strong> Checks every request before granting to ensure Safe State. Processes must declare max needs in advance. Lower utilization. Best for safety-critical systems.</li>
+          <li><strong>Detection (Reactive):</strong> Lets processes take resources freely. Periodically checks for deadlocks. Higher utilization. More practical for modern general-purpose OS.</li>
+        </ul>
+        <div class="box-blue en-text">Avoidance = "Prevention is better than cure" | Detection = "Optimistic approach".</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q29 -->
+  <div class="qa-card" onclick="tog(this)">
+    <div class="q-block">
+      <div class="q-icon">Q</div>
+      <div class="q-text">
+        <div class="q-bn"><span class="lbl"><span class="lang-bn">বাং</span></span> ডেডলক রিকভারির পদ্ধতিগুলো কী?</div>
+        <div class="q-en"><span class="lbl"><span class="lang-en">EN</span></span> What are the methods of Deadlock Recovery?</div>
+      </div>
+      <div class="arr">▾</div>
+    </div>
+    <div class="a-block">
+      <hr class="a-divider">
+      <div class="ans-section">
+        <div class="ans-lang-label bn-label">✦ বাংলা উত্তর</div>
+        <p class="bn-text"><strong>১. প্রসেস টার্মিনেশন:</strong></p>
+        <ul class="bn-text">
+          <li>সব ডেডলক্ড প্রসেস একসাথে বন্ধ — নিশ্চিতভাবে ডেডলক ভাঙে, সব অগ্রগতি হারায়।</li>
+          <li>একটি একটি করে বন্ধ ও পুনরায় পরীক্ষা — কিছু প্রসেস রক্ষা পায়।</li>
+        </ul>
+        <p class="bn-text"><strong>২. রিসোর্স Preemption:</strong> Victim প্রসেস বেছে রিসোর্স কেড়ে নেওয়া। প্রসেসকে Rollback করে পূর্বের Safe State-এ ফেরানো। Starvation-এর ঝুঁকি।</p>
+      </div>
+      <hr class="ans-sep">
+      <div class="ans-section">
+        <div class="ans-lang-label en-label">✦ English Answer</div>
+        <p class="en-text"><strong>1. Process Termination:</strong></p>
+        <ul class="en-text">
+          <li>Abort all deadlocked processes — guaranteed to break deadlock but all progress is lost.</li>
+          <li>Abort one at a time and re-run detection — saves some processes.</li>
+        </ul>
+        <p class="en-text"><strong>2. Resource Preemption:</strong> Select a victim process and take its resource. Roll the process back to a previous Safe State checkpoint. Risk of Starvation if the same process is always chosen as victim.</p>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /ch5 -->
+
+</div><!-- /container -->
+
+<footer>
+  Bangladesh University · CSE Department · Operating System (CSE-3103)<br>
+  দ্বিভাষিক প্রশ্নোত্তর | Bilingual Q&amp;A · বাংলা ও ইংরেজি উভয় ভাষায় · Both Bangla and English
+</footer>
+
+<script>
+  function tog(card) {
+    card.classList.toggle('open');
+  }
+</script>
+</body>
+</html>
